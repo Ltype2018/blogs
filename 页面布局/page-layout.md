@@ -17,7 +17,7 @@
 [BFC详解](https://juejin.im/post/59b73d5bf265da064618731d#heading-12)
 
 ##### 高度，height, margin,width
-- width margin 如margin-left不影响横向布局  
+- width margin 如margin-left不影响横向布局
 + height  
   + 不触发BFC ： margin-top 和父元素融合，影响父元素和外界布局  
   + 触发BFC: 添加overflow:hidden position:absolute,float:left,right 等，不影响父元素和外界布局  
@@ -25,7 +25,13 @@
 ##### float
 - 通过设置父元素overflow:auto来将子元素中的float元素包裹  
 - 设置相邻元素overflow:hidden 与邻近float 分开应用于两列布局  
-
-
-
-
+###### absolute
+- 包裹性：父元素（absolute)宽度由子元素宽度决定
+- 高度塌陷：子元素脱离了父元素（absolute）正常文档流
++ absolute流体与相对特性
+ + absolute 元素未设置top/left..,则位于原正常文档流的位置
+ + absolute 设置left/right 或者 top/bottom,丢失水平/垂直方向特性
+ + 正常布局中，margin:auto = top&bottom=0,left&right = auto
+ + 设置left,right,top,bottom,形成边界和，使得margin-top&margin-bottom 相等，从而居中 
+#### css 框模型
++ 
