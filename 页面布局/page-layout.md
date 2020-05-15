@@ -34,4 +34,5 @@
  + 正常布局中，margin:auto = top&bottom=0,left&right = auto
  + 设置left,right,top,bottom,形成边界和，使得margin-top&margin-bottom 相等，从而居中 
 #### css 框模型
-+ 
++ [详细内容](http://w3help.org/zh-cn/kb/006/)
+ + 
