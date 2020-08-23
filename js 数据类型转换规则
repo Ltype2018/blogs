@@ -1,0 +1,155 @@
+js转换规则不同场景应用
+
+
+
+##### 什么时候自动转换为string类型
+
+在没有对象的前提下
+字符串的自动转换，主要发生在字符串的加法运算时。当一个值为字符串，另一个值为非字符串，则后者转为字符串。
+
+
+'2' + 1 // '21'
+'2' + true // "2true"
+'2' + false // "2false"
+'2' + undefined // "2undefined"
+'2' + null // "2null"
+
+当有对象且与对象+时候
+
+//toString的对象
+var obj2 = {
+    toString:function(){
+        return 'a'
+    }
+}
+console.log('2'+obj2)
+//输出结果2a
+
+//常规对象
+var obj1 = {
+   a:1,
+   b:2
+}
+console.log('2'+obj1)；
+//输出结果 2[object Object]
+
+//几种特殊对象
+'2' + {} // "2[object Object]"
+'2' + [] // "2"
+'2' + function (){} // "2function (){}"
+'2' + ['koala',1] // 2koala,1
+复制代码对下面'2'+obj2详细举例说明如下：
+
+左边为string，ToPrimitive原始值转换后不发生变化
+右边转化时同样按照ToPrimitive进行原始值转换，由于指定的type是number，进行ToPrimitive转化调用obj2.valueof(),得到的不是原始值，进行第三步
+调用toString() return 'a'
+符号两边存在string，而且是+号运算符则都采用String规则转换为string类型进行拼接
+输出结果2a
+
+对下面'2'+obj1详细举例说明如下：
+
+左边为string，ToPrimitive转换为原始值后不发生变化
+右边转化时同样按照ToPrimitive进行原始值转换，由于指定的type是number，进行ToPrimitive转化调用obj2.valueof(),得到{ a: 1, b: 2 }
+调用toString() return [object Object]
+符号两边存在string，而且是+号运算符则都采用String规则转换为string类型进行拼接
+输出结果2[object Object]
+
+代码中几种特殊对象的转换规则基本相同，就不一一说明，大家可以想一下流程。
+注意：不管是对象还不是对象，都有一个转换为原始值的过程，也就是ToPrimitive转换，只不过原始类型转换后不发生变化，对象类型才会发生具体转换。
+string类型转换开发过程中可能出错的点：
+var obj = {
+  width: '100'
+};
+
+obj.width + 20 // "10020"
+
+复制代码预期输出结果120 实际输出结果10020
+什么时候自动转换为Number类型
+
+
+有加法运算符，但是无String类型的时候，都会优先转换为Number类型
+例子：
+true + 0 // 1
+true + true // 2
+true + false //1
+复制代码
+
+除了加法运算符，其他运算符都会把运算自动转成数值。
+例子：
+'5' - '2' // 3
+'5' * '2' // 10
+true - 1  // 0
+false - 1 // -1
+'1' - 1   // 0
+'5' * []    // 0
+false / '5' // 0
+'abc' - 1   // NaN
+null + 1 // 1
+undefined + 1 // NaN
+
+//一元运算符（注意点）
++'abc' // NaN
+-'abc' // NaN
++true // 1
+-false // 0
+复制代码
+
+
+注意：null转为数值时为0，而undefined转为数值时为NaN。
+
+判断等号也放在Number里面特殊说明
+== 抽象相等比较与+运算符不同，不再是String优先，而是Number优先。
+下面列举x == y的例子
+
+如果x,y均为number，直接比较
+没什么可解释的了
+
+1 == 2 //false
+复制代码
+如果存在对象，ToPrimitive()type为number进行转换，再进行后面比较
+
+var obj1 = {
+    valueOf:function(){
+        return '1'
+    }
+}
+1 == obj1  //true
+//obj1转为原始值，调用obj1.valueOf()
+//返回原始值'1'
+//'1'toNumber得到 1 然后比较 1 == 1
+[] == ![] //true
+//[]作为对象ToPrimitive得到 ''  
+//![]作为boolean转换得到0 
+//'' == 0 
+//转换为 0==0 //true
+复制代码
+存在boolean，按照ToNumber将boolean转换为1或者0，再进行后面比较
+
+//boolean 先转成number，按照上面的规则得到1  
+//3 == 1 false
+//0 == 0 true
+3 == true // false
+'0' == false //true
+复制代码4.如果x为string，y为number，x转成number进行比较
+//'0' toNumber()得到 0  
+//0 == 0 true
+'0' == 0 //true
+
+##### 什么时候进行布尔转换
+
+布尔比较时
+if(obj) , while(obj)等判断时或者 三元运算符只能够包含布尔值
+
+条件部分的每个值都相当于false，使用否定运算符后，就变成了true
+if ( !undefined
+  && !null
+  && !0
+  && !NaN
+  && !''
+) {
+  console.log('true');
+} // true
+
+//下面两种情况也会转成布尔类型
+expression ? true : false
+!! expression
