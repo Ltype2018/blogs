@@ -1,0 +1,15 @@
+#####vue 的watch 
+在vuex中，如果多个组件的数据需要通过异步获得，并且这些数据是共享的，那么需要使用watch  
+- 在vuex中使用一些boolean.isexit,根据watch的值调用需要getter 存在而执行的函数
+```javascript
+    getters:"store.somestate.isexit"
+    watch:{
+    'dataneedwatch':{ 
+       if{store.somestate.isexit}{
+       dosomething
+       }
+    }
+    }
+ ```
+ 
+ 
