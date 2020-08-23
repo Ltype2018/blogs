@@ -11,4 +11,5 @@
 - [Airbnb JavaScript 代码规范](https://github.com/BingKui/javascript-zh) 
 - [聊聊 Vue 中 axios 的封装](https://juejin.im/post/6844903969152565261) 
 - [Vue实战技巧](https://juejin.im/post/6844904200598454286) 
-- [细说Array.prototype.slice.call](https://juejin.im/post/6844903550342938637)
+- [细说Array.prototype.slice.call](https://juejin.im/post/6844903550342938637) 
+- [深入浅出 妙用Javascript中apply、call、bind](https://www.cnblogs.com/coco1s/p/4833199.html)
