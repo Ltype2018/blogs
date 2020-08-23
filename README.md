@@ -10,4 +10,5 @@
 - [一劳永逸的搞定 flex 布局](https://juejin.im/post/6844903474774147086) 
 - [Airbnb JavaScript 代码规范](https://github.com/BingKui/javascript-zh) 
 - [聊聊 Vue 中 axios 的封装](https://juejin.im/post/6844903969152565261) 
-- [Vue实战技巧](https://juejin.im/post/6844904200598454286)
+- [Vue实战技巧](https://juejin.im/post/6844904200598454286) 
+- [细说Array.prototype.slice.call](https://juejin.im/post/6844903550342938637)
